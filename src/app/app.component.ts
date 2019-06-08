@@ -21,6 +21,7 @@ export class AppComponent {
       icon: 'list'
     }
   ];
+  isAuth: false;
 
   constructor(
     private platform: Platform,

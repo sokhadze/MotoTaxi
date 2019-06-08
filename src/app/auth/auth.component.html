@@ -6,21 +6,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="margin: 15px">
 
 
   <ion-item>
     <ion-label position="floating">მომხმარებლის სახელი</ion-label>
-    <ion-input [(ngModel)]="username"></ion-input>
+    <ion-input></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">პაროლი</ion-label>
-    <ion-input type="password" [(ngModel)]="password"></ion-input>
+    <ion-input></ion-input>
   </ion-item>
 
-  <ion-button color="primary" (click)="signIn()">შესვლა</ion-button>
-
-  <ion-button color="primary" routerLink="/register">რეგისტრაცია</ion-button>
+  <ion-button color="primary">შესვლა</ion-button>
 
 </ion-content>

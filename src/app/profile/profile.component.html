@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{username ? username : null}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<!--  <div #map id="map"></div>-->
+  <agm-map (centerChange)="checkCenter($event)"
+           (idle)="checkLocation()"
+           (zoomChange)="checkLocation()"
+          [style.height.px]="height"
+          [latitude]="lat"
+          [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    <agm-marker *ngIf="startDestinationMarker.lat" [longitude]="startDestinationMarker.lng" [latitude]="startDestinationMarker.lat"></agm-marker>
+    <agm-marker *ngIf="endDestinationMarker.lat" [longitude]="endDestinationMarker.lng" [latitude]="endDestinationMarker.lat"></agm-marker>
+    <agm-marker *ngFor="let location of mapLocations" [longitude]="location.lng" [latitude]="location.lat" [iconUrl]='{
+              url: "../../../assets/icon/Untitled-1.png",
+                scaledSize: {
+                width: 45,
+                height: 70
+                }}'></agm-marker>
+  </agm-map>
+  <ion-button style="position: absolute; width: 100%; height: 60px; bottom: 0px; left: 0px;"  expand="full" (click)="clickAction()">მონიშვნა</ion-button>
+
+</ion-content>

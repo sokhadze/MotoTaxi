@@ -1,5 +1,7 @@
 {
   "name": "motoTaxi",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
