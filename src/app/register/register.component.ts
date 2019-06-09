@@ -10,14 +10,20 @@ export class RegisterComponent implements OnInit {
   isAuth = false;
   username = '';
   password = '';
+  repeat_password = '';
 
   constructor(private network: NetworkService) { }
 
   ngOnInit() {}
 
   signUp() {
-    if (this.username === '' || this.password === '') {
+    if (this.password === this.repeat_password) {
+      alert("პაროლები არ ემთხვევა!");
       return;
+    }
+    if (this.username === '' || this.password === '') {
+        alert("შეავსეთ ცარიელი ველები!");
+        return;
     }
     const data = {
       username: this.username,

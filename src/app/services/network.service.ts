@@ -35,8 +35,10 @@ export class NetworkService {
 
 
   getRequest(url: string): Observable<any> {
+      const token = btoa(NetworkService.getCookie('username') + ':' + NetworkService.getCookie('password'));
+      //
     const header = new HttpHeaders().set('Content-Type', 'application/json')
-        .set('Authorization', 'Basic ' + NetworkService.getCookie('username') + ':' + NetworkService.getCookie('password'));
+        .set('Authorization', 'Basic ' + token);
     return this.http.get(`${this.url}${url}`, {headers: header})
         .pipe(map(
             (response: Response) => {
@@ -48,8 +50,9 @@ export class NetworkService {
   }
 
   postRequest(data: any, url: string): Observable<any> {
-    const header = new HttpHeaders().set('Content-Type', 'application/json')
-        .set('Authorization', 'Basic ' + NetworkService.getCookie('username') + ':' + NetworkService.getCookie('password'));
+      const token = btoa(NetworkService.getCookie('username') + ':' + NetworkService.getCookie('password'));
+      const header = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', 'Basic ' + token);
     return this.http.post(`${this.url}${url}`, data, {headers: header})
         .pipe(map(
             (response: Response) => {

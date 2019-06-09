@@ -6,6 +6,7 @@ import {CurrentPositionService} from '../services/current-position.service';
 import {google} from '@agm/core/services/google-maps-types';
 import {MapsAPILoader} from '@agm/core';
 import {NetworkService} from '../services/network.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +31,8 @@ export class ProfileComponent implements OnInit {
               private geolocation: Geolocation,
               private currentLocation: CurrentPositionService,
               private mapsAPILoader: MapsAPILoader,
-              private network: NetworkService
+              private network: NetworkService,
+              private router: Router
   ) {
       console.log(platform.height());
       this.height = platform.height() - 56;
@@ -73,7 +75,6 @@ export class ProfileComponent implements OnInit {
             navigator.geolocation.getCurrentPosition((position) => {
                 this.lat = position.coords.latitude;
                 this.lng = position.coords.longitude;
-
             });
         }
     }
@@ -83,6 +84,16 @@ export class ProfileComponent implements OnInit {
 
       setInterval(() => {
           this.refreshPins();
+          const data = {
+              latitude: this.lat,
+              longtitude: this.lng,
+          };
+          this.network.postRequest( data ,`/locations`)
+              .subscribe(
+                  (response) => {
+                      console.log(response);
+                  }
+              );
       }, 5000);
       // this.currentLocation.getLocation
       //     .subscribe(
@@ -149,7 +160,21 @@ export class ProfileComponent implements OnInit {
     }
 
     getMoney(distance) {
-      return distance / 100;
+      return distance / 5000;
+    }
+
+    logOut() {
+      this.user.getUser
+          .subscribe(
+              (response) => {
+                  localStorage.clear();
+                  this.startDestinationMarker = '';
+                  this.endDestinationMarker = '';
+                  this.startSet = false;
+                  this.endSet = false;
+                  this.router.navigate(['/home']);
+              }
+          );
     }
 
     clickAction() {
@@ -159,9 +184,9 @@ export class ProfileComponent implements OnInit {
           this.endSet = true;
       } else {
           const distance = this.getDistanceBetween(this.startDestinationMarker, this.endDestinationMarker);
-          const money = this.getMoney(distance);
+          let money = this.getMoney(distance);
           console.log(distance);
-          console.log(money);
+          money = Math.round(money) + '₾';
           alert("გადასახდელი თანხა: " + money);
       }
     }

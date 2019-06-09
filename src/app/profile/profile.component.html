@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      {{username ? username : null}}
-    </ion-title>
+    <div style="display: flex; justify-content: space-between">
+      <ion-title>
+        {{username ? username : null}}
+      </ion-title>
+      <ion-button (click)="logOut()" color="primary">გასვლა</ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 

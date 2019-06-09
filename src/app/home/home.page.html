@@ -8,8 +8,10 @@
 
 <ion-content>
 
+  <ion-img [src]="'../../../assets/icon/Logo.JPG'"></ion-img>
 
-  <ion-item>
+
+  <ion-item style="margin: 5px">
     <ion-label position="floating">მომხმარებლის სახელი</ion-label>
     <ion-input [(ngModel)]="username"></ion-input>
   </ion-item>
@@ -19,8 +21,10 @@
     <ion-input type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
 
-  <ion-button color="primary" (click)="signIn()">შესვლა</ion-button>
+<div style="display: flex; justify-content: space-around; margin-top: 10px">
+  <ion-button color="success" (click)="signIn()">შესვლა</ion-button>
 
   <ion-button color="primary" routerLink="/register">რეგისტრაცია</ion-button>
 
+</div>
 </ion-content>
